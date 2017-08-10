@@ -1,0 +1,5 @@
+@extends('layouts.training')
+@section('content')
+	@php ($stopForms = 1)
+	@include('training.15')
+@stop

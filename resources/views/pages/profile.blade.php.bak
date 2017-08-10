@@ -1,0 +1,120 @@
+@extends('layouts.app')
+@section('content')
+@php 
+$form = [];
+$form['office-org-chart'] = isset(json_decode(Auth::user()->awards, TRUE)['office-org-chart']) ? json_decode(Auth::user()->awards, TRUE)['office-org-chart'] : '';
+$form['regional-org-chart'] = isset(json_decode(Auth::user()->awards, TRUE)['regional-org-chart']) ? json_decode(Auth::user()->awards, TRUE)['regional-org-chart'] : '';
+$form['office-list'] = isset(json_decode(Auth::user()->awards, TRUE)['office-list']) ? json_decode(Auth::user()->awards, TRUE)['office-list'] : '';
+$form['regional-list'] = isset(json_decode(Auth::user()->awards, TRUE)['regional-list']) ? json_decode(Auth::user()->awards, TRUE)['regional-list'] : '';
+
+@endphp
+  <div class="section section-profile no-pad-bot " id="index-banner">
+    <div class="container-fluid">
+      <br><br>
+      <div class="row center">
+        <div class="col m2 offset-m5 s4 offset-s4">
+          <img alt="" class="avatar circle responsive-img" src="{{ asset('/storage/'.Auth::user()->avatar) }}">
+        </div>
+      </div>
+      <h1 class="header center">{{ Auth::user()->name }}</h1>
+      <br><br>
+    </div>
+    <div class="container-fluid badges-points">
+      <div class="row center">
+        <div class="col s0 m3">
+        </div>
+        <div class="col s6 m3">
+            <h4>Points</h4>
+            <h3 class="points">0</h3>
+        </div>
+        <div class="col s6 m3">
+            <h4>Badges</h4>
+            <h3 class="badges"><?php $badgeCount = 0; if(isset($form['office-list']['totalCount']) && $form['office-list']['totalCount'] >= '3'){ $badgeCount++; } if(isset($form['regional-list']['totalCount']) && $form['regional-list']['totalCount'] >= '3'){ $badgeCount++; } echo $badgeCount; ?></h3>
+        </div>
+        <div class="col s0 m3">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section-badges">
+    <div class="container">
+      <div class="row badges-desc">
+        <div class="col s12">
+          <p><b>Earn:</b>  Some badges earn points.  All earn bragging rights. <br/></p>
+          <p><b>Points:</b>  Take action, points are automatically accumulated as you complete networking activities.  Hitting point thresholds = cool Otis gear! <br/></p>
+          <p><b>Collect:</b>  Watch your collection grow with badges as you master networking and relationship building throughout the organization. <br/></p>
+        </div>
+      </div>
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s6 m4">
+          <div class="card {{ (isset($form['office-list']) && (isset($form['office-list']['totalCount'])) && $form['office-list']['totalCount'] >= '3') ? 'active' : 'inactive' }}">
+            <div class="card-image">
+              <img src="{{ asset('/img/badges/badge-office-org-chart.svg') }}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">Meet My Peeps</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="card two {{ (isset($form['regional-list']) && (isset($form['regional-list']['totalCount'])) && $form['regional-list']['totalCount'] >= '3') ? 'active' : 'inactive' }}">
+            <div class="card-image">
+              <img src="{{ asset('/img/badges/badge-regional-org-chart.svg') }}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">The Network Beyond</h5>
+            </div>
+          </div>
+        </div>        
+        <div class="col s6 m4">
+          <div class="card two">
+            <div class="card-image">
+              <img src="{{asset('/img/badges/badge-ride-along.svg')}}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">Ridin’ with My Reps</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="card">
+            <div class="card-image two">
+              <img src="{{asset('/img/badges/badge-mech.svg')}}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">Field Exploration</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="card">
+            <div class="card-image two">
+              <img src="{{asset('/img/badges/badge-tech-pres.svg')}}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">Technical Presentations</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="card">
+            <div class="card-image two">
+              <img src="{{asset('/img/badges/badge-trophy.svg')}}" class="svg">
+              <span class="card-title black-text center"></span>
+            </div>
+            <div class="card-action">
+              <h5 class="center-align">Ready to Rock Sales</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@stop

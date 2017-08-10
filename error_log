@@ -1,0 +1,1 @@
+[01-May-2017 00:30:52 UTC] PHP Fatal error:  Class 'App\Providers\Schema' not found in /home/jlmceapanel/public_html/cea/otis/app/Providers/AppServiceProvider.php on line 16

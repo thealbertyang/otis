@@ -1,0 +1,341 @@
+@extends('layouts.training')
+@section('content')
+@php 
+$form = [];
+$form['office-org-chart'] = isset(json_decode(Auth::user()->awards, TRUE)['office-org-chart']) ? json_decode(Auth::user()->awards, TRUE)['office-org-chart'] : '';
+$form['regional-org-chart'] = isset(json_decode(Auth::user()->awards, TRUE)['regional-org-chart']) ? json_decode(Auth::user()->awards, TRUE)['regional-org-chart'] : '';
+$form['office-list'] = isset(json_decode(Auth::user()->awards, TRUE)['office-list']) ? json_decode(Auth::user()->awards, TRUE)['office-list'] : '';
+
+//isset($stopForms) ? ($forms = $stopForms ? false : true) : ($forms = true);
+
+
+
+$forms = false;
+$forms2 = true;
+@endphp
+
+		<div class="row">
+			<div class="col s12">
+				<img src="{{asset('public/img/training/support-chart.jpg')}}" class="responsive-img">
+			</div>
+		</div>
+
+	   	@if ($forms and !$forms2)
+	   	<form method="POST" action="{{Request::url()}}" class="row form-office-org-chart">  
+	   	{{ csrf_field() }}
+	   	<input type="hidden" name="form_type" value="office_org_chart">
+	   	<input type="hidden" name="org-chart-complete" value="{{ isset($form['office-org-chart']['org-chart-complete']) ? $form['office-org-chart']['org-chart-complete'] : false }}">
+	   	@else 
+	   	<div class="row">
+	   	@endif
+
+	   	@if ($forms and !$forms2)
+	        <div class="col s12 m12 l12">
+	        	<h5 class="center-align"><b>Your Otis Office Support Network</b></h5>
+	        	<div class="divider"></div>
+				<figure class="org-chart cf">
+				<div class="board">
+					<ul class="columnOne">
+						<li>
+							<span>
+								<img alt="" class="responsive-img" src="{{asset('public/img/training/image002.png')}}" width=167px height=167px>
+								@if ($forms)
+								    <div class="input-field">
+							          	<input id="branch_manager" type="text" name="branch_manager" value="{{ isset($form['office-org-chart']['branch_manager']) ? $form['office-org-chart']['branch_manager'] : '' }}">
+							          	<label for="branch_manager">Position</label>
+							        </div>
+								@else
+									<strong>Branch Manager</strong>
+								@endif
+							</span>
+						</li>
+					</ul>
+				</div>
+			    <ul class="departments">
+			      	<li class="department left">
+			        	<span class="lvl-b">
+							<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image003.png')}}" width=167px height=167px>
+								@if ($forms)
+								    <div class="input-field">
+							          	<input id="sales_manager" type="text" name="sales_manager" value="{{ isset($form['office-org-chart']['sales_manager']) ? $form['office-org-chart']['sales_manager'] : '' }}">
+							          	<label for="sales_manager">Position</label>
+							        </div>
+								@else
+									<strong>Sales Manager</strong>
+								@endif
+						</span>
+				        <ul class="sections">
+				          	<li class="section">
+				          		<span>
+									<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image005.png')}}" width=167px height=167px>
+									@if ($forms)
+									    <div class="input-field">
+								          	<input id="sales_rep" type="text" name="sales_rep" value="{{ isset($form['office-org-chart']['sales_rep']) ? $form['office-org-chart']['sales_rep'] : '' }}">
+								          	<label for="sales_rep">Position</label>
+								        </div>
+									@else
+										<strong>Sales Rep</strong>
+									@endif
+
+				                </span>
+				          	</li>
+				          	<li class="section">
+				          		<span>
+									<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image006.png')}}" width=167px height=167px>
+									@if ($forms)
+									    <div class="input-field">
+								          	<input id="collector" type="text" name="collector" value="{{ isset($form['office-org-chart']['collector']) ? $form['office-org-chart']['collector'] : '' }}">
+								          	<label for="collector">Position</label>
+								        </div>
+									@else
+										<strong>Collector</strong>
+									@endif
+									
+				                </span>
+				          	</li>
+				        </ul>
+			      	</li>
+			      	<li class="department right">
+			        	<span class="lvl-b">
+							<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image004.png')}}" width=167px height=167px>
+							@if ($forms)
+							    <div class="input-field">
+						          	<input id="field_supervisor" type="text" name="field_supervisor" value="{{ isset($form['office-org-chart']['field_supervisor']) ? $form['office-org-chart']['field_supervisor'] : '' }}">
+						          	<label for="field_supervisor">Position</label>
+						        </div>
+							@else
+								<strong>Field Supervisor</strong>
+							@endif
+						</span>
+				        <ul class="sections">
+				          	<li class="section">
+				          		<span>
+									<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image007.png')}}" width=167px height=167px>
+									@if ($forms)
+									    <div class="input-field">
+								          	<input id="field_mechanics" type="text" name="field_mechanics" value="{{ isset($form['office-org-chart']['field_mechanics']) ? $form['office-org-chart']['field_mechanics'] : '' }}">
+								          	<label for="field_mechanics">Position</label>
+								        </div>
+									@else
+										<strong>Field Mechanics</strong>
+									@endif
+
+				                </span>
+				          	</li>
+				          	<li class="section">
+				          		<span>
+									<img alt="" class="responsive-img" id="rect" src="{{asset('public/img/training/image008.png')}}" width=167px height=167px>
+									@if ($forms)
+									    <div class="input-field">
+								          	<input id="parts_procurement" type="text" name="parts_procurement" value="{{ isset($form['office-org-chart']['parts_procurement']) ? $form['office-org-chart']['parts_procurement'] : '' }}">
+								          	<label for="parts_procurement">Position</label>
+								        </div>
+									@else
+										<strong>Parts Procurement</strong>
+									@endif
+				                </span>
+				          	</li>
+				        </ul>
+			      	</li>
+			    </ul>
+			  </figure>
+	        </div>
+	    @endif
+
+	    @if ($forms)
+	    </form>
+	   	@else 
+	   	</div>
+	   	@endif
+
+
+	   	@if ($forms2)
+	   	<form method="POST" action="{{Request::url()}}" class="row form-office-list grey lighten-5 padding-large">  
+	   	{{ csrf_field() }}
+	   	<input type="hidden" name="form_type" value="office_list">
+	   	<input type="hidden" name="totalCount" value="{{ isset($form['office-list']['totalCount']) ? $form['office-list']['totalCount'] : 0 }}">
+	        <div class="col s12 m12 l12">
+
+	        	<h5 class="center-align"><b>List Names From Your Office Support</b></h5>
+	        	<div class="divider mobile-margin-bottom"></div>
+   
+	        	<div class="col s12 m12 l4 mobile-margin-bottom">
+	        		<div class="col s12 center-align">
+	        			<img alt="" class="responsive-img circle white" src="{{asset('public/img/training/image005.png')}}" width=167px height=167px>
+	        			<h5 class="center-align position-title">Sales Rep</h5>
+	        		</div>
+
+	        		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][0]) ? $form['office-list']['list_sales_rep'][0] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][1]) ? $form['office-list']['list_sales_rep'][1] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][2]) ? $form['office-list']['list_sales_rep'][2] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][3]) ? $form['office-list']['list_sales_rep'][3] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][4]) ? $form['office-list']['list_sales_rep'][4] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][5]) ? $form['office-list']['list_sales_rep'][5] : '' }}">
+	          		<input type="text" name="list_sales_rep[]" value="{{ isset($form['office-list']['list_sales_rep'][6]) ? $form['office-list']['list_sales_rep'][6] : '' }}">
+	        	</div>
+	        	<div class="col s12 m12 l4 mobile-margin-bottom">
+	        		<div class="col s12 center-align">
+	        			<img alt="" class="responsive-img circle white" src="{{asset('public/img/training/image004.png')}}" width=167px height=167px>
+	        			<h5 class="center-align position-title">Field Supervisors</h5>
+	        		</div>
+
+	        		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][0]) ? $form['office-list']['list_field_supervisors'][0] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][1]) ? $form['office-list']['list_field_supervisors'][1] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][2]) ? $form['office-list']['list_field_supervisors'][2] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][3]) ? $form['office-list']['list_field_supervisors'][3] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][4]) ? $form['office-list']['list_field_supervisors'][4] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][5]) ? $form['office-list']['list_field_supervisors'][5] : '' }}">
+	          		<input type="text" name="list_field_supervisors[]" value="{{ isset($form['office-list']['list_field_supervisors'][6]) ? $form['office-list']['list_field_supervisors'][6] : '' }}">
+
+	        	</div>
+	        	<div class="col s12 m12 l4 mobile-margin-bottom">
+	        		<div class="col s12 center-align">
+	        			<img alt="" class="responsive-img circle white" src="{{asset('public/img/training/image007.png')}}" width=167px height=167px>
+	        			<h5 class="center-align position-title">Field Mechanics</h5>
+	        		</div>
+	          		
+	        		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][0]) ? $form['office-list']['list_field_mechanics'][0] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][1]) ? $form['office-list']['list_field_mechanics'][1] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][2]) ? $form['office-list']['list_field_mechanics'][2] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][3]) ? $form['office-list']['list_field_mechanics'][3] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][4]) ? $form['office-list']['list_field_mechanics'][4] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][5]) ? $form['office-list']['list_field_mechanics'][5] : '' }}">
+	          		<input type="text" name="list_field_mechanics[]" value="{{ isset($form['office-list']['list_field_mechanics'][6]) ? $form['office-list']['list_field_mechanics'][6] : '' }}">
+	        	</div>
+	    	</div>
+	    </form>
+		@endif
+
+		<div class="divider large"></div>
+
+		<div class="row">
+			<div class="col s12">
+				<img src="{{asset('public/img/training/support-chart-regional.jpg')}}" class="responsive-img">
+			</div>
+		</div>
+
+	    @if ($forms and !$forms2)
+	   	<form method="POST" action="{{Request::url()}}" class="row form-regional-org-chart">  
+	   	{{ csrf_field() }}
+	   	<input type="hidden" name="form_type" value="regional_org_chart">
+	   	<input type="hidden" name="org-chart-complete" value="{{ isset($form['regional-org-chart']['org-chart-complete']) ? $form['regional-org-chart']['org-chart-complete'] : false }}">
+	   	@else 
+	   	<div class="row">
+	   	@endif
+
+	   	@if ($forms and !$forms2)
+	        <div class="col s12 m12 l12">
+	        	<h5 class="center-align"><b>Your Otis Regional Support Network</b></h5>
+	        	<div class="divider"></div>
+				<figure class="org-chart cf regional-chart">
+				<div class="board">
+					<ul class="columnOne">
+						<li>
+							<span>
+								<img alt="" class="responsive-img" src="{{asset('public/img/training/image005.png')}}" width=167px height=167px>
+								@if ($forms)
+								    <div class="input-field">
+							          	<input id="regional_vice_president" type="text" name="regional_vice_president" value="{{ isset($form['regional-org-chart']['regional_vice_president']) ? $form['regional-org-chart']['regional_vice_president'] : '' }}">
+							          	<label for="regional_vice_president">Position</label>
+							        </div>
+								@else
+									<strong>Regional Vice President</strong>
+								@endif
+							</span>
+						</li>
+					</ul>
+				</div>
+			    <ul class="departments">
+			      	<li class="department left">
+			        	<span class="lvl-b">
+							<img alt="" class="responsive-img" src="{{asset('public/img/training/image003.png')}}" width=167px height=167px>
+								@if ($forms)
+								    <div class="input-field">
+							          	<input id="regional_sales_manager" type="text" name="regional_sales_manager" value="{{ isset($form['regional-org-chart']['regional_sales_manager']) ? $form['regional-org-chart']['regional_sales_manager'] : '' }}">
+							          	<label for="regional_sales_manager">Position</label>
+							        </div>
+								@else
+									<strong>Regional Sales Manager</strong>
+								@endif
+						</span>
+				        <ul class="sections">
+				          	<li class="section">
+				          		<span>
+									<img alt="" class="responsive-img" src="{{asset('public/img/training/image005.png')}}" width=167px height=167px>
+									@if ($forms)
+									    <div class="input-field">
+								          	<input id="sales_rep" type="text" name="sales_rep" value="{{ isset($form['regional-org-chart']['sales_rep']) ? $form['regional-org-chart']['sales_rep'] : '' }}">
+								          	<label for="sales_rep">Position</label>
+								        </div>
+									@else
+										<strong>Sales Rep</strong>
+									@endif
+				                </span>
+				          	</li>
+				        </ul>
+			      	</li>
+			      	<li class="department center">
+			        	<span class="lvl-b">
+							<img alt="" class="responsive-img" src="{{asset('public/img/training/image006.png')}}" width=167px height=167px>
+							@if ($forms)
+							    <div class="input-field">
+						          	<input id="regional_hr_manager" type="text" name="regional_hr_manager" value="{{ isset($form['regional-org-chart']['regional_hr_manager']) ? $form['regional-org-chart']['regional_hr_manager'] : '' }}">
+						          	<label for="regional_hr_manager">Position</label>
+						        </div>
+							@else
+								<strong>Regional HR Manager</strong>
+							@endif
+						</span>
+					</li>
+			      	<li class="department right">
+			        	<span class="lvl-b">
+							<img alt="" class="responsive-img" src="{{asset('public/img/training/image008.png')}}" width=167px height=167px>
+							@if ($forms)
+							    <div class="input-field">
+						          	<input id="regional_general_manager" type="text" name="regional_general_manager" value="{{ isset($form['regional-org-chart']['regional_general_manager']) ? $form['regional-org-chart']['regional_general_manager'] : '' }}">
+						          	<label for="regional_general_manager">Position</label>
+						        </div>
+							@else
+								<strong>Regional General Manager</strong>
+							@endif
+						</span>
+			      	</li>
+			    </ul>
+			  </figure>
+	        </div>
+	    @endif
+
+	    @if ($forms)
+	    </form>
+	   	@else 
+	   	</div>
+	   	@endif
+
+	    @if ($forms2)
+	    <div class="row grey lighten-5 padding-large">
+	        <div class="col s12 m12 l12">
+
+	        <h5 class="center-align"><b>Other Members Of Your Support Network</b></h5>
+	        <div class="divider mobile-margin-bottom"></div>
+
+	        	<div class="col s12 m12 l12 mobile-margin-bottom">
+	        		<div class="col s12 center-align">
+	        			<img alt="" class="responsive-img circle white" src="{{asset('public/img/training/image012.jpg')}}" width=167px height=167px>
+	        		</div>
+	        		
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	          		<input type="text" name="" value="">
+	        	</div>
+
+	    	</div>
+	    </div>
+	   	</form>
+	   	<div class="divider white large"></div>
+	    @endif
+	   
+@stop
